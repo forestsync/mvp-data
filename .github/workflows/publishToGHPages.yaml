@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: npm ci --no-audit
       - name: Authenticate
-        run: echo ${{ secrets.service_account_jwt }} > jwt.keys.json
+        run: echo '${{ secrets.service_account_jwt }}' > jwt.keys.json
       - name: Export data
         run: |
           node export-to-json.js
