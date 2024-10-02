@@ -2,17 +2,29 @@
   "name": "@forestsync/mvp-data",
   "version": "0.0.0-development",
   "description": "Pulls the MVP data from a Google Spreadsheet and makes it available as a JSON document.",
-  "main": "export-to-json.js",
   "author": "Forest Sync | https://forestsync.com",
   "license": "MIT",
   "type": "module",
+  "scripts": {
+    "prepare": "husky"
+  },
   "dependencies": {
     "googleapis": "144.0.0",
     "prettier": "3.3.3",
     "sanitize-filename": "1.6.3"
   },
   "prettier": "@bifravst/prettier-config",
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write"
+    ],
+    "*.{md,json,yaml,yml,html,css}": [
+      "prettier --write"
+    ]
+  },
   "devDependencies": {
-    "@bifravst/prettier-config": "1.1.1"
+    "@bifravst/prettier-config": "1.1.1",
+    "husky": "9.1.6",
+    "lint-staged": "15.2.10"
   }
 }
