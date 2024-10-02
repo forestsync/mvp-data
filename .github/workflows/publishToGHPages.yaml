@@ -1,5 +1,8 @@
 name: Publish to Github Pages
 
+permissions:
+  id-token: write
+
 on:
   push:
     branches:
