@@ -34,7 +34,7 @@ for (const {
 	} = await gsheets.spreadsheets.values.get({
 		spreadsheetId,
 		range: `${title}`,
-		valueRenderOption: 'UNFORMATTED_VALUE'
+		valueRenderOption: 'UNFORMATTED_VALUE',
 	})
 
 	if (values === undefined) {
