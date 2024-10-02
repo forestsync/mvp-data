@@ -46,7 +46,7 @@ for (const {
 	const mvpData = rows.map((row) =>
 		Object.fromEntries(row.map((v, i) => [header[i], v])),
 	)
-	const filename = sanitize(`${title.replace(' ', '-')}.json`)
+	const filename = sanitize(`${title.replace(/ +/g, '-')}.json`)
 	const outFile = path.join(__dirname, `data`, filename)
 	await writeFile(outFile, JSON.stringify(mvpData, null, 2))
 	console.log(`Sheet ${sheetId} written to ${filename}.`)
