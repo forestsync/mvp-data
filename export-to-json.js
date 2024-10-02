@@ -24,6 +24,8 @@ const {
 	data: { sheets },
 } = await gsheets.spreadsheets.get({ spreadsheetId })
 
+const jsonIndex = []
+
 for (const {
 	properties: { sheetId, title },
 } of sheets) {
@@ -47,4 +49,15 @@ for (const {
 	const outFile = path.join(__dirname, `data`, filename)
 	await writeFile(outFile, JSON.stringify(mvpData, null, 2))
 	console.log(`Sheet ${sheetId} written to ${filename}.`)
+	jsonIndex.push({
+		sheetId,
+		title,
+		link: `./${filename}`,
+	})
 }
+
+await writeFile(
+	path.join(__dirname, `data`, 'index.json'),
+	JSON.stringify(jsonIndex, null, 2),
+)
+console.log(`Index written.`)
