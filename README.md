@@ -28,5 +28,5 @@ node export-to-json.js
 
 ## GitHub Actions setup
 
-Configure the secret `service_account_jwt` in the `production` environment with the contents of the file
-`jwt.keys.json`.
+Configure the secret `service_account_jwt` in the `production` environment with
+the contents of the file `jwt.keys.json`.
