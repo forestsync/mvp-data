@@ -4,6 +4,22 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import sanitize from 'sanitize-filename'
 
+const convertGeolocation = (geolocation) =>
+	geolocation
+		.trim()
+		.split(',')
+		.map((s) => Number(s.trim()))
+
+const convertPolygon = (polygon) =>
+	polygon.split(',').map((point) => point.trim().split(' ').map(Number))
+
+const convert = (key, value) => {
+	if (value.length === 0) return [key, undefined]
+	if (key === 'geolocation') return [key, convertGeolocation(value)]
+	if (key === 'polygon') return [key, convertPolygon(value)]
+	return [key, value]
+}
+
 try {
 	await mkdir(path.join(process.cwd(), 'data'))
 } catch {
@@ -44,7 +60,7 @@ for (const {
 
 	const [header, ...rows] = values
 	const mvpData = rows.map((row) =>
-		Object.fromEntries(row.map((v, i) => [header[i], v])),
+		Object.fromEntries(row.map((v, i) => convert(header[i], v))),
 	)
 	const filename = sanitize(`${title.replace(/ +/g, '-')}.json`)
 	const outFile = path.join(__dirname, `data`, filename)
