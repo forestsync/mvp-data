@@ -60,7 +60,12 @@ for (const {
 
 	const [header, ...rows] = values
 	const mvpData = rows.map((row) =>
-		Object.fromEntries(row.map((v, i) => convert(header[i], v))),
+		Object.fromEntries(
+			row.map((v, i) => {
+				if (header[i] === undefined) return []
+				return convert(header[i], v)
+			}),
+		),
 	)
 	const filename = sanitize(`${title.replace(/ +/g, '-')}.json`)
 	const outFile = path.join(__dirname, `data`, filename)
